@@ -1,0 +1,18 @@
+# Python bytecode (compiled files)
+__pycache__/
+*.pyc
+
+# Environments
+venv/
+env/
+
+# Databases (Keep your actual data local)
+*.db
+instance/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
