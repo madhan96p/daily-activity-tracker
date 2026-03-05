@@ -35,4 +35,3 @@ daily_activity/
 
 *Engineered Alone. Delivered on Time. Remembered for Precision.*
 
-```
