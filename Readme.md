@@ -36,9 +36,6 @@ daily_activity/
 *Engineered Alone. Delivered on Time. Remembered for Precision.*
 
 ```
-
----
-
 ### Final "Engineered Alone" Checklist:
 1. **Clean Duplicate Files:** Ensure `templates/style.css` and `templates/main.js` are deleted (keep them only in `static/`).
 2. **Git Commit:** ```powershell
