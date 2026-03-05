@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,49 +8,71 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Activity Dashboard Pro</title>
 </head>
+
 <body>
     <div class="dashboard">
-    <div class="input-section white-card">
-        <h2 class="title"><i class="fas fa-plus" style="color: var(--primary);"></i> Add Task</h2>
-        <form action="/" method="POST">
-            <div class="form-group">
-                <input type="text" name="content" placeholder="E.g., Finished UPI Parser" required>
-            </div>
-            <div class="form-group">
-                <select name="category" required>
-                    <option value="" disabled selected>Select Category</option>
-                    <option value="Work">Work</option>
-                    <option value="Freelance">Freelance</option>
-                    <option value="Personal">Personal</option>
-                </select>
-            </div>
-            <button type="submit" class="btn-primary">Add to Stream</button>
-        </form>
-    </div>
+        <div class="input-section white-card">
+            <h2 class="title"><i class="fas fa-plus" style="color: var(--primary);"></i> Add Task</h2>
+            <form action="/" method="POST">
+                <div class="form-group">
+                    <input type="text" name="content" placeholder="E.g., Finished UPI Parser" required>
+                </div>
+                <div class="form-group">
+                    <select name="category" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Work">Work</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Personal">Personal</option>
+                    </select>
+                </div>
+                <div class="time-range-row">
+                    <div class="form-group">
+                        <label>Start</label>
+                        <input type="time" name="start_time">
+                    </div>
+                    <div class="form-group">
+                        <label>End</label>
+                        <input type="time" name="end_time">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Add to Stream</button>
+            </form>
+        </div>
 
-    <div class="list-section white-card">
-        <h2 class="title"><i class="fas fa-list-ul" style="color: var(--text-muted);"></i> Activity Stream</h2>
-        <div class="feed">
-            {% for act in activities %}
-            <div class="activity-card {{ 'done' if act.is_completed }}">
-                <div class="card-left">
-                    <a href="/toggle/{{ act.id }}" class="check-btn">
-                        <i class="{{ 'fas fa-check-circle' if act.is_completed else 'far fa-circle' }}"></i>
-                    </a>
-                    <span class="text">{{ act.content }}</span>
+        <div class="list-section white-card">
+            <h2 class="title"><i class="fas fa-list-ul" style="color: var(--text-muted);"></i> Activity Stream</h2>
+            <div class="feed">
+                {% for act in activities %}
+                <div class="activity-card {{ 'done' if act.is_completed }}">
+                    <div class="card-left">
+                        <a href="/toggle/{{ act.id }}" class="check-btn">
+                            <i class="{{ 'fas fa-check-circle' if act.is_completed else 'far fa-circle' }}"></i>
+                        </a>
+                        <div class="activity-info">
+                            <span class="text">{{ act.content }}</span>
+                            {% if act.start_time or act.end_time %}
+                            <div class="time-display">
+                                <i class="far fa-clock"></i>
+                                <span>{{ act.start_time }}</span>
+                                <i class="fas fa-arrow-right time-separator"></i>
+                                <span>{{ act.end_time }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-right">
+                        <span class="tag">{{ act.category }}</span>
+                        <a href="/delete/{{ act.id }}" class="delete-btn" style="margin-left: 15px;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="card-right">
-                    <span class="tag">{{ act.category }}</span>
-                    <a href="/delete/{{ act.id }}" class="delete-btn" style="margin-left: 15px;">
-                        <i class="fas fa-trash"></i>
-                    </a>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-    
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
+
 </html>

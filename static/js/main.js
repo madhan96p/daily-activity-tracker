@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach((card, index) => {
         setTimeout(() => {
             card.style.opacity = '1';
-            card.style.transform = 'translateX(0)';
-        }, index * 50);
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
     });
 });
